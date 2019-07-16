@@ -1,28 +1,49 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="app">
+    <Header />
+    <div class="box">
+      <!-- <div class="wrap"> -->
+      <!-- <div class="banner">
+          <img
+            src="http://static.vue-js.com/FrhMYPI63ONaHPlhPFB1LhTGPxN4"
+            alt=""
+          >
+      </div>-->
+      <router-view></router-view>
+
+      <!-- </div> -->
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import axios from "axios";
+import Header from "./components/Header";
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    HelloWorld
+    Header
   }
-}
+};
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body {
+  background-color: #e5e5e5;
+}
+
+.box {
+  width: 85%;
+  margin: 0 auto;
+}
+/* .wrap {
+  width: 80%;
+  flex-shrink: 0;
+} */
+.banner {
+  padding: 10px 0;
+}
+.banner img {
+  width: 100%;
 }
 </style>
