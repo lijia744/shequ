@@ -1,58 +1,38 @@
 <template>
   <div class="header">
     <div class="top-wrap">
-      <router-link to='/shequ/'>
+      <router-link to="/shequ/">
         <div class="logo">
-          <img
-            src="https://www.vue-js.com/public/images/vue.png"
-            alt=""
-          >
+          <img src="https://www.vue-js.com/public/images/vue.png" alt />
           <p class="logo-txt">vue.js</p>
         </div>
       </router-link>
       <ul class="header-nav">
-        <li>
-          <router-link to="/shequ/">首页</router-link>
+        <li class="first-page">
+          <router-link v-if="userInfo" to="/shequ/">首页</router-link>
         </li>
         <li>
-          <router-link :to="!userInfo?'/shequ/':'/shequ/my/message'"><span>{{messageNum==0?'':messageNum}}</span> 未读消息</router-link>
+          <router-link v-if="userInfo" :to="!userInfo?'/shequ/':'/shequ/my/message'">
+            <span>{{messageNum==0?'':messageNum}}</span> 未读消息
+          </router-link>
         </li>
-        <!-- <li>微信公众号</li>
-        <li>VUE 2.0</li>
-        <li>参考资料</li>
-        <li>API</li>
-        <li>关于</li>
-        <li>设置</li>
-        <li>退出</li> -->
       </ul>
 
       <div class="user-login">
-        <div
-          v-if="!userInfo"
-          class="login"
-        >
-          <input
-            type="text"
-            v-model="text"
-          >
-          <router-link to='/shequ/'><button @click="login">登录</button></router-link>
+        <div v-if="!userInfo" class="login">
+          <input type="text" v-model="text" />
+          <router-link to="/shequ/">
+            <button @click="login">登录</button>
+          </router-link>
         </div>
-        <div
-          v-else
-          class="logout"
-        >
-          <img
-            :src="userInfo.avatar_url"
-            alt=""
-          >
-          <router-link to='/shequ/'><button @click="logout">退出</button></router-link>
-          <router-link
-            v-if="userInfo"
-            :to='`/shequ/topics/create`'
-          ><button
-              v-if="$route.fullPath.indexOf('create')==-1"
-              class="publish-topic"
-            >发布话题</button></router-link>
+        <div v-else class="logout">
+          <router-link v-if="userInfo" :to="`/shequ/topics/create`">
+            <button v-if="$route.fullPath.indexOf('create')==-1" class="publish-topic">发布话题</button>
+          </router-link>
+          <img :src="userInfo.avatar_url" alt />
+          <router-link to="/shequ/">
+            <button @click="logout">退出</button>
+          </router-link>
         </div>
       </div>
     </div>
@@ -146,17 +126,31 @@ export default {
   margin: 0 auto 15px;
   align-items: center;
 }
-
+.header .top-wrap a {
+  display: flex;
+  flex-grow: 1;
+  color: #eee;
+  transition: all 0.2s;
+}
+.header .top-wrap a:hover {
+  color: #fff;
+}
 .user-login .publish-topic {
   outline: none;
   border: 0;
-  background-color: rgb(240, 125, 18);
-  color: #fff;
+  background-color: #1c6132;
+  color: #eee;
   line-height: 30px;
-  width: 80px;
+  transition: all 0.2s;
   flex-shrink: 0;
+  padding: 0;
 }
-
+.user-login .publish-topic:hover {
+  color: #fff;
+}
+.header {
+  flex-grow: 1;
+}
 .header .logo {
   display: flex;
   align-items: center;
@@ -172,43 +166,45 @@ export default {
   color: #fff;
 }
 .header .header-nav {
-  width: 60%;
   display: flex;
   justify-content: flex-start;
   font-size: 14px;
-  color: #fff;
   flex-shrink: 0;
 }
 .header .header-nav li {
   cursor: pointer;
   flex-shrink: 0;
-  margin-right: 20px;
 }
-.header .header-nav li a {
-  color: #fff;
+.header .header-nav .first-page {
+  margin-right: 20px;
 }
 .user-login .logout img {
   width: 45px;
+  margin-left: 20px;
 }
 .header .top-wrap .user-login .login,
 .header .top-wrap .user-login .logout {
   display: flex;
   align-items: center;
-  flex-grow: 1;
-  justify-content: flex-end;
+  /* flex-grow: 1; */
+  /* justify-content: flex-end; */
 }
 .header .top-wrap .user-login .login input {
   outline: none;
   line-height: 30px;
   border: none;
 }
-
 .user-login button {
   outline: none;
   border: 0;
-  background-color: rgb(16, 105, 165);
-  color: #fff;
+  padding: 0;
+  background-color: #1c6132;
+  color: #eee;
   line-height: 30px;
-  width: 60px;
+  margin: 0 0 0 20px;
+  transition: all 0.2s;
+}
+.user-login button:hover {
+  color: #fff;
 }
 </style>

@@ -1,69 +1,56 @@
 <template>
-  <div
-    class="topics"
-    v-if='topics'
-  >
+  <div class="topics" v-if="topics">
     <article>
       <div class="article-head">
         <div>
-          <span
-            class="tab active"
-            v-if="topics.top||topics.good"
-          >{{topics.top?'置顶':'精华'}}</span>
+          <span class="tab active" v-if="topics.top||topics.good">{{topics.top?'置顶':'精华'}}</span>
           <h2>{{topics.title}}</h2>
-          <span
-            @click="changeCollect"
-            v-if="isLogin"
-            class="collect"
-          >{{!is_collect?'加入收藏':'取消收藏'}}</span>
+          <span @click="changeCollect" v-if="isLogin" class="collect">{{!is_collect?'加入收藏':'取消收藏'}}</span>
         </div>
         <p style="font-size:12px">
-          <span><b>•</b> 发布于{{myMoment(topics.create_at)}}</span>
-          <span><b>•</b> 作者{{(topics.author.loginname)}}</span>
-          <span><b>•</b> {{topics.visit_count}}次浏览</span>
-          <span><b>•</b> 来自{{topics.tab==="share"?'分享':topics.tab==="job"?'招聘':topics.tab==='ask'?'问答':'weex'}}</span>
+          <span>
+            <b>•</b>
+            发布于{{myMoment(topics.create_at)}}
+          </span>
+          <span>
+            <b>•</b>
+            作者{{(topics.author.loginname)}}
+          </span>
+          <span>
+            <b>•</b>
+            {{topics.visit_count}}次浏览
+          </span>
+          <span>
+            <b>•</b>
+            来自{{topics.tab==="share"?'分享':topics.tab==="job"?'招聘':topics.tab==='ask'?'问答':'weex'}}
+          </span>
         </p>
       </div>
-      <div
-        class="topic_content"
-        v-html="topics.content"
-      ></div>
+      <div class="topic_content" v-html="topics.content"></div>
     </article>
     <div class="comment">
       <span>{{topics.replies.length}}回复</span>
       <ul class="comment-list">
-        <li
-          v-for="comment in topics.replies"
-          :key="comment.id"
-        >
-          <img
-            :src="comment.author.avatar_url"
-            alt=""
-          >
+        <li v-for="comment in topics.replies" :key="comment.id">
+          <img :src="comment.author.avatar_url" alt />
           <div>
             <span class="loginname">{{comment.author.loginname}}</span>
             <span v-html="comment.content"></span>
           </div>
           <div class="ups">
-            <span><span @click="up(comment.id)">{{isUped(comment.id)?'👍':'赞'}}</span>{{comment.ups.length?comment.ups.length:''}}</span>
-            <span @click="addreply(comment.author.loginname)">
-              回复
+            <span>
+              <span @click="up(comment.id)">{{isUped(comment.id)?'👍':'赞'}}</span>
+              {{comment.ups.length?comment.ups.length:''}}
             </span>
+            <span @click="addreply(comment.author.loginname)">回复</span>
           </div>
         </li>
       </ul>
     </div>
     <div class="addcomment">
-      <span>添加回复 </span>
-      <form action="">
-        <textarea
-          class="textarea"
-          name=""
-          id=""
-          cols="30"
-          rows="10"
-          v-model="text"
-        ></textarea>
+      <span>添加回复</span>
+      <form action>
+        <textarea class="textarea" name id cols="30" rows="10" v-model="text"></textarea>
         <button @click="addComment">回复</button>
       </form>
     </div>
@@ -195,9 +182,10 @@ export default {
   flex-grow: 1;
 }
 .topics article .article-head > div .collect {
-  background-color: rgb(27, 233, 188);
+  background-color: #369219;
+  color: #fff;
   font-size: 14px;
-  padding: 3px;
+  padding: 3px 10px;
   border-radius: 3px;
   cursor: pointer;
 }
@@ -309,7 +297,7 @@ export default {
   margin-bottom: 10px;
   color: #1c6132;
   font-size: 14px;
-  background-color: #c6c6c6;
+  background-color: #6ba44e;
   line-height: 30px;
   border-radius: 5px;
 }

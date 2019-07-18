@@ -5,57 +5,50 @@
         <router-link
           @click.native="total=856"
           :class="$route.fullPath==='/shequ/'||$route.fullPath.indexOf('/shequ/?tab=all')!=-1? 'active':''"
-          to='/shequ/?tab=all'
+          to="/shequ/?tab=all"
         >全部</router-link>
       </li>
       <li>
         <router-link
           @click.native="total=15"
           :class="$route.fullPath.indexOf('/shequ/?tab=good')!=-1? 'active':''"
-          to='/shequ/?tab=good'
+          to="/shequ/?tab=good"
         >精华</router-link>
       </li>
       <li>
         <router-link
           @click.native="total=3"
           :class="$route.fullPath.indexOf('/shequ/?tab=weex')!=-1? 'active':''"
-          to='/shequ/?tab=weex'
+          to="/shequ/?tab=weex"
         >weex</router-link>
       </li>
       <li>
         <router-link
           @click.native="total=247"
           :class="$route.fullPath.indexOf('/shequ/?tab=share')!=-1? 'active':''"
-          to='/shequ/?tab=share'
+          to="/shequ/?tab=share"
         >分享</router-link>
       </li>
       <li>
         <router-link
           @click.native="total=577"
           :class="$route.fullPath.indexOf('/shequ/?tab=ask')!=-1? 'active':''"
-          to='/shequ/?tab=ask'
+          to="/shequ/?tab=ask"
         >问答</router-link>
       </li>
       <li>
         <router-link
           @click.native="total=30"
           :class="$route.fullPath.indexOf('/shequ/?tab=job')!=-1? 'active':''"
-          to='/shequ/?tab=job'
+          to="/shequ/?tab=job"
         >招聘</router-link>
       </li>
     </ul>
     <div class="content">
-      <ul v-if="topics.length">
-        <li
-          v-for="topic in topics"
-          :key="topic.id"
-        >
-          <router-link :to='`/shequ/user/${topic.author.loginname}`'>
-            <img
-              style="width:30px;height:30px"
-              :src="topic.author.avatar_url"
-              alt=""
-            >
+      <ul v-if="topics.length" class="main">
+        <li v-for="topic in topics" :key="topic.id">
+          <router-link :to="`/shequ/user/${topic.author.loginname}`">
+            <img style="width:30px;height:30px" :src="topic.author.avatar_url" alt />
           </router-link>
           <div class="count">
             <span>{{topic.reply_count}}</span>/
@@ -68,21 +61,20 @@
           <router-link :to="'/shequ/topic/'+topic.id">{{topic.title}}</router-link>
           <span class="time">{{myMoment(topic.last_reply_at)}}</span>
         </li>
-      </ul> <img
+      </ul>
+      <img
         style="width:100%"
         v-else
         src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1562752382072&di=d3633635b4c61519fd33d75d704df720&imgtype=0&src=http%3A%2F%2Fimg.zhisheji.com%2Fbbs%2Fforum%2F201705%2F03%2F103018wu707lkqwwzcy4ow.gif"
-        alt=""
-      >
+        alt
+      />
       <el-pagination
         background
-        @current-change='changePage'
+        @current-change="changePage"
         layout="prev, pager, next"
         :total="total"
-      >
-      </el-pagination>
+      ></el-pagination>
     </div>
-
   </div>
 </template>
 
@@ -135,9 +127,9 @@ export default {
 } */
 .home .nav {
   display: flex;
-  padding: 20px 0;
+  padding: 10px 0;
   margin: 0;
-  background-color: #e5e5e5;
+  background-color: #f6f6f6;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
@@ -162,23 +154,23 @@ export default {
   padding: 0;
   margin: 0;
 }
-.content > ul li {
+.content > ul > li {
   padding: 10px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #f0f0f0;
 }
-.content > ul li:hover {
-  background: #e5e5e5;
+.content > ul > li:hover {
+  background: #f6f6f6;
 }
-.content > ul li a {
+.content > ul > li a {
   font-size: 14px;
   color: #000;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-.content > ul li a:hover {
+.content > ul > li a:hover {
   text-decoration: underline;
 }
 .tab {
@@ -195,20 +187,26 @@ export default {
   color: #fff;
   background-color: #369219;
 }
-.content > ul li > img,
-.content > ul li .count {
+.content > ul > li > img,
+.content > ul > li .count {
   flex-shrink: 0;
 }
 
-.content > ul li .count {
+.content > ul > li .count {
   font-size: 12px;
   color: #b4b4b4;
   width: 100px;
   text-align: center;
 }
-.content > ul li .time {
+.content > ul > li .time {
   flex-grow: 1;
   text-align: end;
   flex-shrink: 0;
 }
+/* .content .el-pagination .el-pager .number {
+  width: 20px;
+}
+.content .el-pagination .el-pager {
+  display: flex;
+} */
 </style>

@@ -29,7 +29,7 @@ export default {
 
 <style>
 body {
-  background-color: #e5e5e5;
+  background-color: #e1e1e1;
 }
 
 .box {
